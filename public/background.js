@@ -9,10 +9,14 @@ chrome.runtime.onMessage.addListener((message) => {
 
 chrome.alarms.onAlarm.addListener((alarm) => {
   if (alarm.name === 'autoRefresh') {
-    chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
-      if (tabs[0] && tabs[0].url.startsWith("https://www.upwork.com/nx/search/jobs")) {
-        chrome.tabs.reload(tabs[0].id);
-      }
+    chrome.tabs.query({}, (tabs) => {
+
+      tabs.map(tab => {
+        if (tab.url.startsWith("https://www.upwork.com/nx/search/jobs")) {
+          chrome.tabs.reload(tab.id);
+        }
+      })
+
     });
   }
 });
