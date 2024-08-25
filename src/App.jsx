@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-
+import bell from "./assets/bell.mp3";
 import "./App.css";
 
 function App() {
@@ -11,6 +11,21 @@ function App() {
         setIsSubscribed(true);
       }
     });
+  }, []);
+
+  useEffect(() => {
+    const messageListener = (message) => {
+      if (message.action === "playSound") {
+        const audio = new Audio(chrome.runtime.getURL(bell));
+        audio.play();
+      }
+    };
+
+    chrome.runtime.onMessage.addListener(messageListener);
+
+    return () => {
+      chrome.runtime.onMessage.removeListener(messageListener);
+    };
   }, []);
 
   function handleSubscribe() {
