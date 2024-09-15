@@ -63,7 +63,6 @@ function App() {
     setRemainingSeconds(60); // Reset remaining seconds
   }
 
-  console.log(remainingSeconds)
   return (
     <>
       <div>

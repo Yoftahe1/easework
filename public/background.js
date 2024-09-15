@@ -49,7 +49,7 @@ function executeScript(tabId, notFirstTime) {
     oldJobs = results[0].result
 
     if (newJobs.length > 0 && notFirstTime) {
-      chrome.runtime.sendMessage({ action: "playSound" });
+      notifyUser(tabId)
     }
   });
 }
@@ -62,6 +62,7 @@ function getHTMLContent() {
   })
 }
 
-function notifyUser() {
-  chrome.runtime.sendMessage({ action: 'playSound' });
+function notifyUser(tabId) {
+  // chrome.runtime.sendMessage({ action: 'playSound' });
+  // chrome.tabs.sendMessage(tabId, { type: 'changeColor', newJobs });
 }
