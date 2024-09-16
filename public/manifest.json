@@ -13,12 +13,6 @@
   "background": {
     "service_worker": "background.js"
   },
-  "content_scripts": [
-    {
-      "matches": ["*://*/*"],
-      "js": ["content.js"]
-    }
-  ],
   "permissions": ["tabs", "scripting", "storage", "alarms"],
   "host_permissions": ["*://*/*"]
 }
