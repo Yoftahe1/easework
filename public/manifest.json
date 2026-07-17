@@ -1,7 +1,7 @@
 {
   "manifest_version": 3,
-  "name": "easework",
-  "version": "1.0.0",
+  "name": "Easework",
+  "version": "2.0.0",
   "icons": {
     "16": "./up.png",
     "48": "./up.png",
@@ -13,6 +13,12 @@
   "background": {
     "service_worker": "background.js"
   },
-  "permissions": ["tabs", "scripting", "storage", "alarms"],
+  "content_scripts": [
+    {
+      "matches": ["https://www.upwork.com/nx/search/jobs*"],
+      "js": ["content.js"]
+    }
+  ],
+  "permissions": ["tabs", "scripting", "storage", "alarms", "notifications"],
   "host_permissions": ["*://*/*"]
 }

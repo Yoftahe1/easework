@@ -1,19 +1,18 @@
-chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
-    if (request.type === 'changeColor') {
-        const { newJobs } = request;
+chrome.runtime.onMessage.addListener((request) => {
+  if (request.type === "changeColor") {
+    const { newJobs } = request;
 
-        // Get all <a> elements on the page
-        const aElements = document.querySelectorAll('a');
+    // Get all <a> elements with a job UID attribute
+    const jobLinks = document.querySelectorAll("a[data-ev-job-uid]");
 
-        // Iterate over each <a> element
-        aElements.forEach(a => {
-            // If the <a> text content matches any string in the array
-            if (newJobs.includes(a.textContent)) {
-                a.style.color = 'red'; // Change color to red
-            }
-            else {
-                a.style.color = 'black';
-            }
-        });
-    }
+    // Iterate over each job link element
+    jobLinks.forEach((a) => {
+      const jobUid = a.getAttribute("data-ev-job-uid");
+      if (newJobs.includes(jobUid)) {
+        a.style.color = "red"; // Change color to red for new jobs
+      } else {
+        a.style.color = ""; // Restore default styles for non-new jobs
+      }
+    });
+  }
 });
